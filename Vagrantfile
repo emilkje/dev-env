@@ -19,13 +19,15 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 3306, host: 33066
   # Forward http port on 8080, used for connecting web browsers to localhost:8080
   config.vm.network :forwarded_port, guest: 80, host: 8080
+  # Forward xdebug port on 9000, used for connection to localhost:9000
+  config.vm.network :forwarded_port, guest: 9000, host: 9000
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network :private_network, ip: "192.168.33.10"
 
   # Set share folder permissions to 777 so that apache can write files
-  config.vm.synced_folder ".", "/vagrant", :extra => 'dmode=777,fmode=666'
+  config.vm.synced_folder ".", "/vagrant", :extra => 'dmode=777,fmode=775'
 
   # Provider-specific configuration so you can fine-tune VirtualBox for Vagrant.
   # These expose provider-specific options.
@@ -43,9 +45,9 @@ Vagrant.configure("2") do |config|
 
     # List of recipes to run
     chef.add_recipe "vagrant_main"
-    chef.add_recipe "vagrant_main::wordpress"
-    chef.add_recipe "vagrant_main::drupal"
-    chef.add_recipe "vagrant_main::magento"
-    chef.add_recipe "vagrant_main::nodejs"
+    #chef.add_recipe "vagrant_main::wordpress"
+    #chef.add_recipe "vagrant_main::drupal"
+    #chef.add_recipe "vagrant_main::magento"
+    #chef.add_recipe "vagrant_main::nodejs"
   end
 end

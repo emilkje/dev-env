@@ -2,6 +2,11 @@
   ServerName <%= @params[:server_name] %>
   ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
   DocumentRoot <%= @params[:docroot] %>
+  <% unless @params[:includes].nil? || @params[:includes] == 0 %>
+  <% @params[:includes].each do |inc| %>
+    Include <%= inc %>
+  <% end %>
+  <% end %>
   RewriteEngine On
   
   <Directory <%= @params[:docroot] %>>

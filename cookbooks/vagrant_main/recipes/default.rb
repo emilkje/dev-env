@@ -49,6 +49,7 @@ sites.each do |name|
     template "sites.conf.erb"
     server_name site["host"]
     server_aliases site["aliases"]
+    includes site["includes"]
     docroot site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
   end  
 
